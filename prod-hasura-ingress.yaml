@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  name: hasura-prod-ingress
+  annotations:
+    cert-manager.io/issuer: "letsencrypt-prod"
+
+spec:
+  ingressClassName: public
+  tls:
+  - hosts:
+    - hasura.tarf.io
+    secretName: prod-hasura-tls1
+  rules:
+  - host: hasura.tarf.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hasura-tarf
+            port:
+              number: 8080

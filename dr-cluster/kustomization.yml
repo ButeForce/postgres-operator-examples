@@ -1,4 +1,4 @@
 namespace: default
 
 resources:
-- postgres.yaml
+- dr-cluster.yaml

@@ -3,31 +3,14 @@ kind: PostgresCluster
 metadata:
   name: hippo
 spec:
-  #shutdown: true
-  #patroni:
-  #  dynamicConfiguration:
-  #    postgresql:
-  #      pg_hba:
-  #        - "hostnossl all all all md5"
-  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres-gis:centos8-13.5-3.1-0
-  postgresVersion: 13
-  instances:
-    - name: instance2
-      replicas: 3
-      resources:
-        limits:
-          #cpu: 8.0
-          #memory: 12Gi
-      dataVolumeClaimSpec:
-        accessModes:
-        - "ReadWriteOnce"
-        resources:
-          requests:
-            storage: 10Gi
+  shutdown: true
+
+
   backups:
     pgbackrest:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.36-0
-      global:
+      pgbackrest:
+        global:
           repo1-retention-full: "14"
           repo1-retention-full-type: time
       manual:
